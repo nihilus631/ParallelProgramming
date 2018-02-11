@@ -3,12 +3,12 @@ package requests;
 import java.lang.invoke.WrongMethodTypeException;
 
 public class Request {
-    int whoSendThis;
-    String PIN;
-    requests.RequestType type;
-    int howMuch;// сколько денег перевести/снять/внести
-    int toWhom; // идентификатор пользователя, которому перевести денежку
-    String requestResult;// точная информация о том, чем закончилась операция. Устанавливается только банком
+    private int whoSendThis;
+    private String PIN;
+    private requests.RequestType type;
+    private int howMuch;// сколько денег перевести/снять/внести
+    private int toWhom; // идентификатор пользователя, которому перевести денежку
+    private String requestResult;// точная информация о том, чем закончилась операция. Устанавливается только банком
 
     public Request(int whoSendThis, String PIN, requests.RequestType type, int howMuch, int toWhom) {
         this.whoSendThis = whoSendThis;
