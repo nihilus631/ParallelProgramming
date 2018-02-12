@@ -3,7 +3,7 @@ import requests.RequestTypeException;
 
 import java.util.ArrayList;
 
-public class ATM {
+public class ATM implements Runnable {
     int id;
     ArrayList<Request> requestList = new ArrayList<>();
 
@@ -49,6 +49,26 @@ public class ATM {
                 System.out.println(rq);
             }
 
+        }
+    }
+
+    @Override
+    public void run() {
+        boolean flag;
+        for(Request rq: requestList){
+            flag = true;
+            try {
+                flag = Bank.handleRequest(rq);
+            } catch (RequestTypeException e) {
+                flag = false;
+                rq.setRequestResult("Провал - Приносим свои извинения, банкомат не работает");
+            } catch (InterruptedException e) {
+                flag = false;
+                rq.setRequestResult("Провал - Приносим свои извинения, банкомат не работает");
+            } finally {
+                Bank.feedback(flag);
+                System.out.println(rq);
+            }
         }
     }
 }

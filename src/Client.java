@@ -27,12 +27,12 @@ public class Client {
             }
             case 2:{
                 rq = RequestType.CASH_OUT;
-                howMuch = 100 + rand.nextInt(9901);
+                howMuch = 100 + rand.nextInt(2901);
                 break;
             }
             case 3:{
                 rq = RequestType.TRASFER;
-                howMuch = 100 + rand.nextInt(9901);
+                howMuch = 100 + rand.nextInt(2901);
                 toWhom = rand.nextInt(1001);
                 break;
             }

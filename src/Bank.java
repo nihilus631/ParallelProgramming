@@ -12,16 +12,25 @@ public class Bank {
 
     public static void createBankRepo(int count){
         Random rand = new Random() ;
+        bills = new int[count];
         for (int i=0; i<count; i++)
             bills[i] = rand.nextInt(5000);
 
     }
 
+    public static int getPositiveRequests() {
+        return positiveRequests;
+    }
+
+    public static int getNegativeRequests() {
+        return negativeRequests;
+    }
+
     public static boolean handleRequest(Request request) throws RequestTypeException, InterruptedException {
         boolean res = true;
             sem.acquire();
-
-            if(request.getPIN().contains("9")){
+            Random rand = new Random();
+            if(rand.nextInt(20) == 9){
                 request.setRequestResult("Провал - Неверный PIN");
                 sem.release();
                 return false;
@@ -37,7 +46,7 @@ public class Bank {
                     break;
                 case CASH_OUT:
                     if(bills[request.getWhoSendThis()]<request.getHowMuch()){
-                        request.setRequestResult("Провал - на счёте недостоточно средств");
+                        request.setRequestResult("Провал - Недостаточно средств. Тут всего "+bills[request.getWhoSendThis()]+" золота.");
                         res = false;
                     }
                     else{
